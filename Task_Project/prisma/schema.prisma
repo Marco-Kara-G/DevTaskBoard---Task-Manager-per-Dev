@@ -28,3 +28,12 @@ model User{
 
 @@unique([name,last_name,date_of_birth])
 }
+
+
+model Task{
+  id String @id @default(uuid())
+  title String 
+  status String @default("todo")
+  create_at DateTime @default(now()) 
+
+}
