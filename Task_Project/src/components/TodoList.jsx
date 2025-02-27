@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { FaCircle, FaSpinner, FaCheckCircle } from "react-icons/fa";
 
 export function TodoList() {
   const [taskList, setTaskList] = useState([]);
@@ -72,22 +73,22 @@ export function TodoList() {
                       Status: <span className="task-value">{task.status}</span>
                     </p>
                   </div>
-                  <div className="task-icon">
+                  <div className="task-icons">
                     {task.status !== "todo" && (
                       <button onClick={() => updateTaskStatus(task.id, "todo")}>
-                        todo
+                        <FaCircle size={20} color="#FFD700" />
                       </button>
                     )}
                     {task.status !== "Pending" && (
                       <button
                         onClick={() => updateTaskStatus(task.id, "Pending")}
                       >
-                        pending
+                        <FaSpinner size={20} color="#FF8C00" />
                       </button>
                     )}
                     {task.status !== "done" && (
                       <button onClick={() => updateTaskStatus(task.id, "done")}>
-                        done
+                        <FaCheckCircle size={20} color="#32CD32" />
                       </button>
                     )}
                   </div>
@@ -111,22 +112,22 @@ export function TodoList() {
                       Status: <span className="task-value">{task.status}</span>
                     </p>
                   </div>
-                  <div className="task-icon">
+                  <div className="task-icons">
                     {task.status !== "todo" && (
                       <button onClick={() => updateTaskStatus(task.id, "todo")}>
-                        todo
+                        <FaCircle size={20} color="#FFD700" />
                       </button>
                     )}
                     {task.status !== "Pending" && (
                       <button
                         onClick={() => updateTaskStatus(task.id, "Pending")}
                       >
-                        pending
+                        <FaSpinner size={20} color="#FF8C00" />
                       </button>
                     )}
                     {task.status !== "done" && (
                       <button onClick={() => updateTaskStatus(task.id, "done")}>
-                        done
+                        <FaCheckCircle size={20} color="#32CD32" />
                       </button>
                     )}
                   </div>
@@ -150,22 +151,22 @@ export function TodoList() {
                       Status: <span className="task-value">{task.status}</span>
                     </p>
                   </div>
-                  <div className="task-icon">
+                  <div className="task-icons">
                     {task.status !== "todo" && (
                       <button onClick={() => updateTaskStatus(task.id, "todo")}>
-                        todo
+                        <FaCircle size={20} color="#FFD700" />
                       </button>
                     )}
                     {task.status !== "Pending" && (
                       <button
                         onClick={() => updateTaskStatus(task.id, "Pending")}
                       >
-                        pending
+                        <FaSpinner size={20} color="#FF8C00" />
                       </button>
                     )}
                     {task.status !== "done" && (
                       <button onClick={() => updateTaskStatus(task.id, "done")}>
-                        done
+                        <FaCheckCircle size={20} color="#32CD32" />
                       </button>
                     )}
                   </div>

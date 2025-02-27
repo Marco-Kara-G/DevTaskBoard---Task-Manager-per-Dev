@@ -75,22 +75,37 @@
   font-weight: bolder;
 }
 
-.task-icon {
+.task-icons {
   position: absolute;
-  right: -500px;
   top: 50%;
-  transform: translateY(-50%);
+  right: -315px;
   display: flex;
-  gap: 5px;
-  transition: right 0.3s ease-in-out;
+  gap: 10px;
+  transform: translateX(30px);
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-.task-todo-container:hover .task-icon {
-  right: -285px;
+.task-todo-container:hover .task-icons {
+  transform: translateX(0);
+  opacity: 1;
 }
-.task-pending-container:hover .task-icon {
-  right: -285px;
+.task-pending-container:hover .task-icons {
+  transform: translateX(0);
+  opacity: 1;
 }
-.task-done-container:hover .task-icon {
-  right: -285px;
+.task-done-container:hover .task-icons {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.task-icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.task-icons button:hover {
+  transform: scale(1.2);
 }
