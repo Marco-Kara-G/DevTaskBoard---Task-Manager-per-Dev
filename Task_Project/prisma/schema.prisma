@@ -32,7 +32,7 @@ model User{
 
 model Task{
   id String @id @default(uuid())
-  title String 
+  title String @unique
   status String @default("todo")
   create_at DateTime @default(now()) 
 
