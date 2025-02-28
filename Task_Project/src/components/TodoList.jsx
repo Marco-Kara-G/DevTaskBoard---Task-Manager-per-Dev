@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { FaCircle, FaSpinner, FaCheckCircle } from "react-icons/fa";
+import "./TodoList.css";
 
 export function TodoList() {
   const [taskList, setTaskList] = useState([]);

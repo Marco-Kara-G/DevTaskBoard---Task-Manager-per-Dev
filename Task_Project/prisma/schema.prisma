@@ -30,10 +30,28 @@ model User{
 }
 
 
+model Project{
+  id String @id @default(uuid())
+  title String
+  description String
+  languages Languages[]
+  tasks Task []
+}
+
+model Languages{
+  id String @id @default(uuid())
+  language_name String @unique
+  type String
+  project Project @relation(fields: [project_id], references: [id])
+  project_id String
+}
+
+
 model Task{
   id String @id @default(uuid())
   title String @unique
   status String @default("todo")
   create_at DateTime @default(now()) 
-
+  project Project @relation(fields: [task_id], references: [id])
+  task_id String
 }
