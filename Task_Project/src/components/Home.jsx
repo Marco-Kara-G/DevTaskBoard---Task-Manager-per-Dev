@@ -29,12 +29,15 @@ export function Homepage() {
     "Julia",
   ];
 
-  const handleProjectAdd =(event)=>{
-    
-    const addProjectFetch= async ()=>{
-    const resposne= await fetch(`https://localhost:5000/projects`, {method:`GET`,body:})
-  }}
+const [projectInfo, setProjectInfo]= useState(null)
+
+const handleNewProjectInfo= (event)=>{
+const projectTitle= event.target.project-title.value;
+const projectDescription= event.target.project-description.value;
+setProjectInfo({title:projectTitle, description: project Description});
+}
   
+    
 
   return (
     <>
