@@ -28,12 +28,15 @@ const prisma = new PrismaClient();
 
 //i use a addproject controller function to add a new projects to my task manager
 export const addProject = async (req, res) => {
-  const { title, description } = req.body;
+  console.log("received data: ", req.body);
+
+  const { title, description, language } = req.body;
   try {
     const newProject = await prisma.project.create({
       data: {
         title: title,
         description: description,
+        language: language,
       },
     });
     console.log(newProject);

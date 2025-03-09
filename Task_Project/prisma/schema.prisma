@@ -34,16 +34,8 @@ model Project{
   id String @id @default(uuid())
   title String
   description String
-  languages Languages[]
+  language String[]
   tasks Task []
-}
-
-model Languages{
-  id String @id @default(uuid())
-  language_name String @unique
-  type String
-  project Project @relation(fields: [project_id], references: [id])
-  project_id String
 }
 
 
