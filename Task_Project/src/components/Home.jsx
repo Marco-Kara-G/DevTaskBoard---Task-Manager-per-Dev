@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Select from "react-select";
+import Select from "react-dropdown-select";
+
 import "./Home.css";
 
 export function Homepage() {
@@ -72,6 +73,7 @@ export function Homepage() {
     { value: "D", label: "D" },
     { value: "XQuery", label: "XQuery" },
   ];
+
   const [languageArray, setLanguageArray] = useState([]);
 
   const onChange = (e) => {
@@ -114,6 +116,14 @@ export function Homepage() {
                     placeholder="put you're description here..."
                     onChange={onChange}
                   />
+                </label>
+                <label htmlFor="languagesList">
+                  <Select
+                    name="languagesList"
+                    id="languagesList"
+                    multi
+                    options={languages}
+                  ></Select>
                 </label>
 
                 <button>Add project</button>

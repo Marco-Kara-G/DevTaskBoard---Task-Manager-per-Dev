@@ -69,7 +69,7 @@
 #projectDescription {
   width: 100%;
   padding: 0.5rem;
-  height: 14rem;
+  height: 10rem;
   border-radius: 8px;
   outline: none;
   border: solid rgba(117, 117, 119, 0.39) 1px;
@@ -79,6 +79,28 @@
   font-size: large;
   resize: none;
   color: whitesmoke;
+}
+
+.css-1o5fdv0-ReactDropdownSelect {
+  color: whitesmoke;
+  text-transform: capitalize;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.css-hbtqrf-OptionComponent {
+  background-color: rgb(10, 9, 15);
+  background: rgb(10, 9, 15);
+  padding: 5px;
+}
+
+.css-1vl1o2-DropDown {
+  background-color: rgb(22, 21, 34);
+  color: whitesmoke;
+  max-height: 170px;
+}
+.css-1vl1o2-DropDown > span {
+  border: none;
 }
 
 .project-add-section > button {
