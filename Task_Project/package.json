@@ -15,10 +15,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "primereact": "^10.9.3",
     "prisma": "^6.4.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-dropdown-select": "^4.11.4",
     "react-icons": "^5.5.0"
   },
   "devDependencies": {

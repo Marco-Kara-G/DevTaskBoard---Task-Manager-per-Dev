@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Select from "react-dropdown-select";
+import { MultiSelect } from "primereact/multiselect";
 
 import "./Home.css";
 
@@ -74,7 +74,7 @@ export function Homepage() {
     { value: "XQuery", label: "XQuery" },
   ];
 
-  const [languageArray, setLanguageArray] = useState([]);
+  const [languageArray, setLanguageArray] = useState(null);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -117,15 +117,20 @@ export function Homepage() {
                     onChange={onChange}
                   />
                 </label>
-                <label htmlFor="languagesList">
-                  <Select
-                    name="languagesList"
-                    id="languagesList"
-                    multi
+                <label htmlFor="projectMultiselect">
+                  <MultiSelect
+                    className="projectMultiselect"
+                    name="projectMultiselect"
+                    id="projectMultiselect"
                     options={languages}
-                  ></Select>
+                    placeholder="Select language..."
+                    optionLabel="label"
+                    value={languageArray}
+                    onChange={(e) => setLanguageArray(e.value)}
+                    display="chip"
+                    filter
+                  />
                 </label>
-
                 <button>Add project</button>
               </form>
             </div>
