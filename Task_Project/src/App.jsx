@@ -1,12 +1,10 @@
 import "./App.css";
-import { Homepage } from "./components/Home";
-
-import { TodoList } from "./components/TodoList";
+import { ProjectsPage } from "./components/Projects";
 
 function App() {
   return (
     <>
-      <Homepage />
+      <ProjectsPage />
     </>
   );
 }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { MultiSelect } from "primereact/multiselect";
 
-import "./Home.css";
+import "./Projects.css";
 
-export function Homepage() {
+export function ProjectsPage() {
   const [addProject, setAddProject] = useState(false);
   const [projectInfo, setProjectInfo] = useState(null);
 
