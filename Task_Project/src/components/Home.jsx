@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MultiSelect } from "primereact/multiselect";
 
 import "./Home.css";
@@ -78,6 +78,28 @@ export function Homepage() {
 
   const onChange = (e) => {
     const { name, value } = e.target;
+    setProjectInfo((eprev) => ({ ...eprev, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const sendProjectInfo = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/projects", {
+          method: "POST",
+          body: JSON.stringify(projectInfo),
+          headers: { "content-type": "application/JSON" },
+        });
+
+        if (!response.ok) {
+          console.error("An error is occured response: ", response.ok);
+        }
+        log;
+      } catch (error) {
+        console.error("failed to load new project", error);
+      }
+    };
+    sendProjectInfo();
   };
 
   return (
@@ -95,13 +117,13 @@ export function Homepage() {
         {addProject && (
           <div className="bgDiv">
             <div className="project-add-container">
-              <form className="project-add-section">
+              <form className="project-add-section" onSubmit={handleSubmit}>
                 <h2>Add A New Project Info </h2>
                 <label htmlFor="project-title">
                   Project Title:
                   <input
                     type="text"
-                    name="projectTitle"
+                    name="title"
                     id="projectTitle"
                     placeholder="Project title..."
                     onChange={onChange}
@@ -111,7 +133,7 @@ export function Homepage() {
                   Description:
                   <textarea
                     type="text"
-                    name="projectDescription"
+                    name="description"
                     id="projectDescription"
                     placeholder="put you're description here..."
                     onChange={onChange}
@@ -126,12 +148,18 @@ export function Homepage() {
                     placeholder="Select language..."
                     optionLabel="label"
                     value={languageArray}
-                    onChange={(e) => setLanguageArray(e.value)}
+                    onChange={(e) => {
+                      setLanguageArray(e.value);
+                      setProjectInfo((eprev) => ({
+                        ...eprev,
+                        language: e.value,
+                      }));
+                    }}
                     display="chip"
                     filter
                   />
                 </label>
-                <button>Add project</button>
+                <button type="submit">Add project</button>
               </form>
             </div>
           </div>
