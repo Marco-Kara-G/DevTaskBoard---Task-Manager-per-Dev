@@ -7,7 +7,7 @@ export function ProjectsPage() {
   const [addProject, setAddProject] = useState(false);
   const [projectInfo, setProjectInfo] = useState(null);
 
-  // use a language array and a optionChange to load project obj with updated info
+  //i take all the language info in an array and send it to select options
   const languages = [
     // Linguaggi di programmazione
     { value: "JavaScript", label: "JavaScript" },
@@ -76,11 +76,13 @@ export function ProjectsPage() {
 
   const [languageArray, setLanguageArray] = useState(null);
 
+  //i use a onchange function to update projectInfo with values from titlte e description input fields
   const onChange = (e) => {
     const { name, value } = e.target;
     setProjectInfo((eprev) => ({ ...eprev, [name]: value }));
   };
 
+  //i use a handlesubmit function to POST whole projectIfo object to server
   const handleSubmit = (event) => {
     event.preventDefault();
     const sendProjectInfo = async () => {
