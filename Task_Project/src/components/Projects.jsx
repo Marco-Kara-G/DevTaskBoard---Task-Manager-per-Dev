@@ -108,22 +108,20 @@ export function ProjectsPage() {
   useEffect(() => {
     const getProjects = async () => {
       try {
-        const response = await fetch("http://localhost:5000/projects", {
-          method: "GET",
-        });
-        console.log(response);
+        const response = await fetch("http://localhost:5000/projects");
 
         if (!response.ok) {
-          return console.error("an error is occured:", response.ok);
+          console.error("Error in fetching data");
+          return;
         }
-        const data = await response.json();
-        console.log(data);
 
+        const data = await response.json();
         setProjectList(data);
       } catch (error) {
-        console.error("error iin fetch data:", error);
+        console.error("Error in fetching data:", error);
       }
     };
+
     getProjects();
   }, []);
 
@@ -132,6 +130,18 @@ export function ProjectsPage() {
   return (
     <>
       <div className="dashboard-container">
+        {projectList &&
+          projectList.map((project) => (
+            <div key={project.id} className="project-info-container">
+              <h3 className="project-info-tiitle">{project.title}</h3>
+              <p className="project-info-description">{project.description}</p>
+              <ul>
+                {project.language.map((language) => (
+                  <li key={language.index}>{language}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         <button
           className="project-add-button"
           onClick={() => {

@@ -52,7 +52,7 @@ export const addProject = async (req, res) => {
 export const showProjects = async (req, res) => {
   try {
     const projectsList = await prisma.project.findMany();
-    return res.status(309).json(projectsList);
+    return res.status(200).json(projectsList);
   } catch (error) {
     res.status(500).json({ msg: "error in fetch data", error });
   }
