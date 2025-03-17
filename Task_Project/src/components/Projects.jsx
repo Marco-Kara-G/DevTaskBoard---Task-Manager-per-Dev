@@ -6,6 +6,7 @@ import "./Projects.css";
 export function ProjectsPage() {
   const [addProject, setAddProject] = useState(false);
   const [projectInfo, setProjectInfo] = useState(null);
+  const [projectList, setProjectList] = useState(null);
 
   //i take all the language info in an array and send it to select options
   const languages = [
@@ -96,13 +97,37 @@ export function ProjectsPage() {
         if (!response.ok) {
           console.error("An error is occured response: ", response.ok);
         }
-        log;
       } catch (error) {
         console.error("failed to load new project", error);
       }
     };
     sendProjectInfo();
   };
+
+  //ii use a fetch function to fetch all project data from fdatabase
+  useEffect(() => {
+    const getProjects = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/projects", {
+          method: "GET",
+        });
+        console.log(response);
+
+        if (!response.ok) {
+          return console.error("an error is occured:", response.ok);
+        }
+        const data = await response.json();
+        console.log(data);
+
+        setProjectList(data);
+      } catch (error) {
+        console.error("error iin fetch data:", error);
+      }
+    };
+    getProjects();
+  }, []);
+
+  console.log(projectList);
 
   return (
     <>
@@ -120,7 +145,36 @@ export function ProjectsPage() {
           <div className="bgDiv">
             <div className="project-add-container">
               <form className="project-add-section" onSubmit={handleSubmit}>
-                <h2>Add A New Project Info </h2>
+                <div className="form-header">
+                  <h2>Add A New Project Info </h2>
+                  <button
+                    className="close-button"
+                    onClick={() => {
+                      setAddProject(false);
+                    }}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <line
+                        x1="4"
+                        y1="4"
+                        x2="20"
+                        y2="20"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                      <line
+                        x1="20"
+                        y1="4"
+                        x2="4"
+                        y2="20"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
                 <label htmlFor="project-title">
                   Project Title:
                   <input

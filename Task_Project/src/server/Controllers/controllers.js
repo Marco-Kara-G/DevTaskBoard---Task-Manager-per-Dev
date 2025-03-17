@@ -30,19 +30,21 @@ const prisma = new PrismaClient();
 export const addProject = async (req, res) => {
   console.log("received data: ", req.body);
 
-  const { projectTitle, projectDescription, projectLanguages } = req.body;
+  const { title, description, language } = req.body;
+
   try {
     const newProject = await prisma.project.create({
       data: {
-        title: projectTitle,
-        description: projectDescription,
-        language: projectLanguages,
+        title,
+        description,
+        language,
       },
     });
     console.log(newProject);
-    res.status(201).json({ msg: `Project add correctly`, newProject });
+    res.status(201).json({ msg: `Project added correctly`, newProject });
   } catch (error) {
-    res.status(500).json({ msg: { error } });
+    console.error("Error creating project:", error); // Log dettagliato
+    res.status(500).json({ msg: error.message });
   }
 };
 

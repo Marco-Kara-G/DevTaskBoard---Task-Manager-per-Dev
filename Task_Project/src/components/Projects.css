@@ -49,6 +49,37 @@
   padding: 10px;
 }
 
+.form-header {
+  width: 100%;
+  display: flex;
+  position: relative;
+  height: 4rem;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.form-header > h2 {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  font-size: xx-large;
+}
+
+.close-button {
+  z-index: 2;
+  right: 1rem;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: whitesmoke;
+}
+
+.close-button:hover {
+  cursor: pointer;
+}
+
 .project-add-section > label {
   display: flex;
   flex-direction: column;
