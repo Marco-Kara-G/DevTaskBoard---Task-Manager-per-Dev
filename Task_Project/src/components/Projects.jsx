@@ -133,7 +133,7 @@ export function ProjectsPage() {
         {projectList &&
           projectList.map((project) => (
             <div key={project.id} className="project-info-container">
-              <h3 className="project-info-tiitle">{project.title}</h3>
+              <h3 className="project-info-title">{project.title}</h3>
               <p className="project-info-description">{project.description}</p>
               <ul>
                 {project.language.map((language) => (

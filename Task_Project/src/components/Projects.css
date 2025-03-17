@@ -1,190 +1,215 @@
+/* Reset e base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #1e1e2f;
+  color: #e0e0e0;
+}
+
+/* Contenitore principale con sfondo */
 .bgDiv {
   width: 100%;
   height: 100vh;
-  background-color: rgba(35, 40, 68, 0.699);
-  position: relative;
-  z-index: 1;
+  background-color: rgba(35, 40, 68, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Contenitore del form */
 .project-add-container {
-  background-color: rgb(22, 21, 34);
-  border-radius: 10px;
-  z-index: 2;
-  width: 600px;
-  height: 600px;
-  color: whitesmoke;
+  background-color: #2b2b40;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  padding: 2rem;
+  color: #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
+/* Bottone di apertura form */
 .project-add-button {
-  height: 8rem;
-  width: 16rem;
-  z-index: 0;
-  position: absolute;
-  font-size: xx-large;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
   text-transform: capitalize;
-  font-weight: bolder;
+  border: none;
+  border-radius: 8px;
+  background-color: #3a3a5d;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
+.project-add-button:hover {
+  background-color: #50507a;
+}
+
+/* Sezione del form */
 .project-add-section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .project-add-section > h2 {
-  font-weight: bolder;
-  font-size: xx-large;
-  text-transform: capitalize;
-  padding: 10px;
+  font-size: 1.8rem;
+  text-align: center;
 }
 
+/* Header del form */
 .form-header {
-  width: 100%;
   display: flex;
-  position: relative;
-  height: 4rem;
-  justify-content: center;
-  padding: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .form-header > h2 {
-  text-align: center;
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-  font-size: xx-large;
+  font-size: 1.5rem;
 }
 
+/* Bottone di chiusura */
 .close-button {
-  z-index: 2;
-  right: 1rem;
-  position: absolute;
-  background-color: transparent;
+  background: transparent;
   border: none;
-  outline: none;
-  color: whitesmoke;
-}
-
-.close-button:hover {
+  color: #e0e0e0;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
+.close-button:hover {
+  color: #ff5f5f;
+}
+
+/* Label e Input */
 .project-add-section > label {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  text-transform: capitalize;
-  font-weight: bolder;
-  font-size: larger;
-  align-self: stretch;
-  margin: 0 50px;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
-#projectTitle {
-  padding: 10px;
-  outline: none;
-  border-radius: 8px;
-  border: solid rgba(117, 117, 119, 0.39) 1px;
-  color: black;
-  background-color: transparent;
-  font-weight: bolder;
-  text-transform: capitalize;
-  color: whitesmoke;
-}
-
+#projectTitle,
 #projectDescription {
-  width: 100%;
-  padding: 0.5rem;
-  height: 10rem;
+  padding: 0.75rem;
   border-radius: 8px;
+  border: 1px solid #5b5b7a;
+  background-color: #1e1e2f;
+  color: #e0e0e0;
   outline: none;
-  border: solid rgba(117, 117, 119, 0.39) 1px;
-  background-color: transparent;
-  font-weight: bolder;
-  text-transform: capitalize;
-  font-size: large;
-  resize: none;
-  color: whitesmoke;
+  transition: border-color 0.3s ease;
 }
 
+#projectTitle:focus,
+#projectDescription:focus {
+  border-color: #8f9fff;
+}
+
+/* Textarea */
+#projectDescription {
+  height: 8rem;
+  resize: none;
+}
+
+/* Multiselect */
 .projectMultiselect {
-  border: solid rgba(117, 117, 119, 0.39) 1px;
-  padding: 10px;
+  padding: 0.75rem;
   border-radius: 8px;
+  border: 1px solid #5b5b7a;
+  background-color: #1e1e2f;
+  color: #e0e0e0;
 }
 
 .p-multiselect-items-wrapper {
   max-height: 150px;
-  color: whitesmoke;
-  background-color: rgb(10 10 16);
-  border: solid rgba(117, 117, 119, 0.39) 1px;
-  padding: 5px;
-}
-
-.p-multiselect-label {
-  display: flex;
-  gap: 5px;
+  background-color: #2b2b40;
+  padding: 0.5rem;
+  border-radius: 8px;
 }
 
 .p-multiselect-token {
-  gap: 5px;
-  padding: 0 5px;
-  background-color: rgb(10 10 16);
-  border-radius: 8px;
-  border: solid rgba(117, 117, 119, 0.39) 1px;
+  background-color: #3a3a5d;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
 }
 
-.p-multiselect-item {
-  gap: 5px;
-}
-
-.p-multiselect-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 40px;
-  background-color: rgb(10 10 16);
-  padding: 10px;
-}
-
+/* Input Filter */
 .p-multiselect-filter-container > input {
-  padding: 5px;
-  background-color: transparent;
-  outline: none;
-  border: solid rgba(117, 117, 119, 0.39) 1px;
-  color: whitesmoke;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #5b5b7a;
+  background-color: #1e1e2f;
+  color: #e0e0e0;
+  width: 90%;
+  margin: 0 5%;
 }
 
-.p-multiselect-filter-icon {
-  position: absolute;
+.p-multiselect-filter-container > input:focus {
+  border-color: #8f9fff;
+}
+
+.p-multiselect-filter-container > svg {
+  right: 8%;
   top: 30%;
-  left: 95%;
-  color: rgba(117, 117, 119, 0.59);
 }
 
+/* Bottone di invio */
 .project-add-section > button {
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  border: solid rgba(117, 117, 119, 0.39) 2px;
-  background-color: rgb(22, 21, 34);
-  color: whitesmoke;
-  font-size: medium;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #3a3a5d;
+  color: #fff;
+  font-size: 1rem;
   text-transform: capitalize;
-  transition: background-color 0.5s ease 0s;
+  transition: background-color 0.3s ease;
 }
 
 .project-add-section > button:hover {
-  background-color: rgb(47, 44, 83);
-  cursor: pointer;
+  background-color: #50507a;
+}
+
+/* Contenitore informazioni progetto */
+.project-info-container {
+  background-color: #3a3a5d;
+  border: 1px solid #5b5b7a;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 20rem;
+  margin-top: 1rem;
+}
+
+/* Media Queries per la responsività */
+@media (max-width: 768px) {
+  .project-add-container {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .project-add-button {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  .form-header > h2 {
+    font-size: 1.2rem;
+  }
+
+  .project-add-section > button {
+    width: 100%;
+  }
+
+  #projectTitle,
+  #projectDescription {
+    font-size: 0.9rem;
+  }
 }
