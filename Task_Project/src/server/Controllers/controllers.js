@@ -60,14 +60,18 @@ export const showProjects = async (req, res) => {
 
 //i use a deleteProject controller function to delete a projects from my projects list
 export const deleteProject = async (req, res) => {
-  const { id } = req.body;
+  console.log("received data: ", req.params.id);
+  const projectId = req.params.id;
   try {
     const deletedProject = await prisma.project.delete({
       where: {
-        id: id,
+        id: projectId,
       },
     });
-
+    if (!deletedProject) {
+      console.error("error: project not found!");
+      return;
+    }
     res.status(200).json({ msg: "project delete correctly", deletedProject });
   } catch (error) {
     res.status(500).json({ msg: "error in delete function: ", error });

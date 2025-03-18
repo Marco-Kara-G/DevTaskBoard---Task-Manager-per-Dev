@@ -13,6 +13,6 @@ app.use(cors());
 
 app.get(`/projects`, showProjects);
 app.post(`/projects`, addProject);
-app.delete(`/projects`, deleteProject);
+app.delete(`/projects/:id`, deleteProject);
 
 app.listen(5000, () => console.log("Server running on port 5000"));

@@ -97,11 +97,34 @@ export function ProjectsPage() {
         if (!response.ok) {
           console.error("An error is occured response: ", response.ok);
         }
+        setLanguageArray(null);
+        setAddProject(false);
       } catch (error) {
         console.error("failed to load new project", error);
       }
     };
+
     sendProjectInfo();
+  };
+
+  //i use a fetch funcion to handle the delete of a project
+  const deleteProject = async (project) => {
+    const id = project.id;
+    console.log(id);
+
+    try {
+      const response = await fetch(`http://localhost:5000/projects/${id}`, {
+        method: "DELETE",
+        headers: { "content-type": "application / JSON" },
+      });
+      if (!response.ok) {
+        console.error("an error is occured");
+        return;
+      }
+      const data = await response.json();
+    } catch (error) {
+      console.error("error, cannot use this command", error);
+    }
   };
 
   //ii use a fetch function to fetch all project data from fdatabase
@@ -123,9 +146,7 @@ export function ProjectsPage() {
     };
 
     getProjects();
-  }, []);
-
-  console.log(projectList);
+  }, [addProject]);
 
   return (
     <>
@@ -133,13 +154,51 @@ export function ProjectsPage() {
         {projectList &&
           projectList.map((project) => (
             <div key={project.id} className="project-info-container">
-              <h3 className="project-info-title">{project.title}</h3>
-              <p className="project-info-description">{project.description}</p>
-              <ul>
-                {project.language.map((language) => (
-                  <li key={language.index}>{language}</li>
-                ))}
-              </ul>
+              <div className="project-info-container-head">
+                <h3 className="project-info-title">{project.title}</h3>
+                <button onClick={() => deleteProject(project)}>
+                  <svg
+                    width="18"
+                    height="18"
+                    fill="#ffffff"
+                    version="1.1"
+                    id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 490.646 490.646"
+                    xmlSpace="preserve"
+                    stroke="#ffffff"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <g>
+                        {" "}
+                        <g>
+                          {" "}
+                          <path d="M399.179,67.285l-74.794,0.033L324.356,0L166.214,0.066l0.029,67.318l-74.802,0.033l0.025,62.914h307.739L399.179,67.285z M198.28,32.11l94.03-0.041l0.017,35.262l-94.03,0.041L198.28,32.11z"></path>{" "}
+                          <path d="M91.465,490.646h307.739V146.359H91.465V490.646z M317.461,193.372h16.028v250.259h-16.028V193.372L317.461,193.372z M237.321,193.372h16.028v250.259h-16.028V193.372L237.321,193.372z M157.18,193.372h16.028v250.259H157.18V193.372z"></path>{" "}
+                        </g>{" "}
+                      </g>{" "}
+                    </g>
+                  </svg>
+                </button>
+              </div>
+              <div className="project-info-container-details">
+                <p className="project-info-description">
+                  {project.description}
+                </p>
+                <ul>
+                  {project.language.map((language) => (
+                    <li key={language.index}>{language}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         <button
