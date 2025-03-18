@@ -8,12 +8,31 @@ export function LoginPage() {
     const { name, value } = e.target;
     setUserInfo((eprev) => ({ ...eprev, [name]: value }));
   };
-  console.log(userInfo);
+
+  const addUser = async (e) => {
+    e.preventDefault();
+    console.log(userInfo);
+
+    try {
+      const response = await fetch("http://localhost:5000/user", {
+        method: "POST",
+        body: JSON.stringify(userInfo),
+        headers: { "content-type": "application/json" },
+      });
+      if (!response.ok) {
+        console.error("error is occured response:", response.ok);
+        return;
+      }
+      const data = await response.json();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="main-container">
       <h2>Welcome</h2>
-      <form className="sign-in-form">
+      <form className="sign-in-form" onSubmit={addUser}>
         <div className="sign-in-form-personal-info">
           <div className="input-row">
             <label htmlFor="user-name">Name: </label>
@@ -23,6 +42,7 @@ export function LoginPage() {
               id="user-name"
               placeholder="First Name"
               onChange={handleInfoChange}
+              required
             />
           </div>
           <div className="input-row">
@@ -33,6 +53,7 @@ export function LoginPage() {
               id="user-last-name"
               placeholder="Last Name"
               onChange={handleInfoChange}
+              required
             />
           </div>
           <div className="input-row">
@@ -42,6 +63,7 @@ export function LoginPage() {
               name="date_of_birth"
               id="user-birth-date"
               onChange={handleInfoChange}
+              required
             />
           </div>
         </div>
@@ -55,6 +77,7 @@ export function LoginPage() {
               id="login-name"
               placeholder="UserName"
               onChange={handleInfoChange}
+              required
             />
           </div>
           <div className="input-row">
@@ -65,6 +88,7 @@ export function LoginPage() {
               id="user-email"
               placeholder="example@something.com"
               onChange={handleInfoChange}
+              required
             />
           </div>
           <div className="input-row">
@@ -75,6 +99,7 @@ export function LoginPage() {
               id="user-password"
               placeholder="select your password..."
               onChange={handleInfoChange}
+              required
             />
           </div>
         </div>

@@ -77,3 +77,33 @@ export const deleteProject = async (req, res) => {
     res.status(500).json({ msg: "error in delete function: ", error });
   }
 };
+
+export const addUser = async (req, res) => {
+  console.log("received data:", req.body);
+  const { name, last_name, username, date_of_birth, email, password } =
+    req.body;
+
+  // Correggi la formattazione della data
+  const formatedDate = new Date(date_of_birth);
+  if (isNaN(formatedDate.getTime())) {
+    return res.status(400).json({ msg: "Invalid date format" });
+  }
+
+  try {
+    const newUser = await prisma.user.create({
+      data: {
+        name,
+        last_name,
+        username,
+        date_of_birth: formatedDate, // Ora è un oggetto Date valido
+        email,
+        password,
+      },
+    });
+
+    // Correggi il formato della risposta JSON
+    res.status(200).json({ msg: "User added correctly", user: newUser });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};

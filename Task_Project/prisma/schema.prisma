@@ -24,6 +24,7 @@ model User{
   email String @unique
   password String 
   create_at DateTime @default(now())
+  projects Project[]
 
 
 @@unique([name,last_name,date_of_birth])
@@ -36,6 +37,8 @@ model Project{
   description String
   language String[]
   tasks Task []
+  user User @relation(fields: [user_id], references: [id])
+  user_id String
 }
 
 
