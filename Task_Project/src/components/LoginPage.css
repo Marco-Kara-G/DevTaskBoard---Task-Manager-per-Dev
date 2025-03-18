@@ -29,8 +29,24 @@ h2 {
   text-align: center;
 }
 
+.form-container {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  position: absolute;
+}
+
 /* Stile del form */
-.sign-in-form {
+.sign-in-form,
+.log-in-form {
   background-color: #3a3a5d;
   border: 1px solid #5b5b7a;
   padding: 2rem;
@@ -102,6 +118,21 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #6a6ab7;
+}
+
+.change-log-sign-page {
+  color: #bbbbdd;
+}
+
+.change-log-sign-page > p > button {
+  background: transparent;
+  border: none;
+  color: #bbbbdd;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.change-log-sign-page > p > button:hover {
+  color: #ffffff;
 }
 
 /* 📌 RESPONSIVE DESIGN */
