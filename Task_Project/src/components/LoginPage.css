@@ -3,3 +3,121 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* LoginPage.css */
+
+/* LoginPage.css */
+
+/* Stile generale */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #2a2a3b;
+  color: #ffffff;
+  padding: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* Stile del form */
+.sign-in-form {
+  background-color: #3a3a5d;
+  border: 1px solid #5b5b7a;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Contenitore per due input per riga */
+.input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-row label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #bbbbdd;
+  text-align: center; /* Allinea il testo al centro */
+}
+
+.input-row input {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #2a2a3b;
+  color: #ffffff;
+  outline: none;
+  font-size: 1rem;
+  text-align: center; /* Centra il testo inserito */
+  transition: all 0.2s ease-in-out;
+}
+
+.input-row input:focus {
+  background-color: #404066;
+}
+
+/* Sezione info personali e login */
+.sign-in-form-personal-info,
+.sign-in-form-loginInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Stile del pulsante */
+button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #5b5b7a;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 1.5rem;
+}
+
+button[type="submit"]:hover {
+  background-color: #6a6ab7;
+}
+
+/* 📌 RESPONSIVE DESIGN */
+@media (min-width: 600px) {
+  .input-row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .input-row label {
+    width: 30%;
+    text-align: left; /* Allinea il testo a sinistra su schermi grandi */
+  }
+
+  .input-row input {
+    width: 70%;
+    text-align: left; /* Ripristina il testo a sinistra */
+  }
+}
