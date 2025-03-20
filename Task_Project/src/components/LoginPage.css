@@ -4,11 +4,6 @@
   box-sizing: border-box;
 }
 
-/* LoginPage.css */
-
-/* LoginPage.css */
-
-/* Stile generale */
 .main-container {
   display: flex;
   flex-direction: column;
@@ -84,6 +79,18 @@ h2 {
   font-size: 1rem;
   text-align: center; /* Centra il testo inserito */
   transition: all 0.2s ease-in-out;
+}
+
+.input-row-check {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.input-row-check > input {
+  width: 90%;
+  align-self: end;
 }
 
 .input-row input:focus {

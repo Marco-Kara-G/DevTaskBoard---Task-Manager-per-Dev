@@ -29,6 +29,7 @@ export function LoginPage() {
     }
 
     setUserInfo((eprev) => ({ ...eprev, [name]: value }));
+    console.log(userInfo, emailCheck, passwordCheck);
   };
 
   const addUser = async (e) => {
@@ -119,6 +120,7 @@ export function LoginPage() {
               </div>
               <div className="input-row">
                 <label htmlFor="user-email">Email: </label>
+
                 <input
                   type="email"
                   name="email"
@@ -127,24 +129,27 @@ export function LoginPage() {
                   onChange={handleInfoChange}
                   required
                 />
-                {emailCheck && <p>must be a valid email</p>}
+                {!emailCheck && <p>must be a valid email</p>}
               </div>
               <div className="input-row">
                 <label htmlFor="user-password">Password:</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="user-password"
-                  placeholder="select your password..."
-                  onChange={handleInfoChange}
-                  required
-                />
-                {passwordCheck && (
-                  <p>
-                    password must capital and lowercase letters numbers and
-                    symbols{" "}
-                  </p>
-                )}
+                <div className="input-row-check">
+                  <input
+                    type="password"
+                    name="password"
+                    id="user-password"
+                    placeholder="select your password..."
+                    onChange={handleInfoChange}
+                    required
+                  />
+
+                  {!passwordCheck && (
+                    <p>
+                      password must capital and lowercase letters numbers and
+                      symbols{" "}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
             <button type="submit">Sign-In</button>{" "}
