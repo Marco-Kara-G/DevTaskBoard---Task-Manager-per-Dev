@@ -6,12 +6,43 @@ export function LoginPage() {
   const [signIn, setSignIn] = useState(false);
   const [logIn, setLogIn] = useState(true);
 
+  //we use useState to manage variables state and check values from email and passord
+  const [passwordCheck, setPasswordCheck] = useState(null);
+  const [emailCheck, setEmailCheck] = useState(null);
+
   const handleInfoChange = (e) => {
     const { name, value } = e.target;
+
+    //i use a check to see id email's value respect the pattern const
+
+    if (name === "email") {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      setEmailCheck(emailCheck.test(value));
+    }
+
+    //as before i use a check to see is password's value respect the pattern const
+
+    if (name === "password") {
+      const passwordPattern =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      setPasswordCheck(passwordPattern.test(value));
+    }
+
     setUserInfo((eprev) => ({ ...eprev, [name]: value }));
   };
 
   const addUser = async (e) => {
+    if (!emailCheck) {
+      console.error("error in sign in data");
+
+      return;
+    }
+
+    if (!passwordCheck) {
+      console.error("error in sign in data");
+
+      return;
+    }
     console.log(userInfo);
 
     try {
@@ -96,6 +127,7 @@ export function LoginPage() {
                   onChange={handleInfoChange}
                   required
                 />
+                {emailCheck && <p>must be a valid email</p>}
               </div>
               <div className="input-row">
                 <label htmlFor="user-password">Password:</label>
@@ -107,6 +139,12 @@ export function LoginPage() {
                   onChange={handleInfoChange}
                   required
                 />
+                {passwordCheck && (
+                  <p>
+                    password must capital and lowercase letters numbers and
+                    symbols{" "}
+                  </p>
+                )}
               </div>
             </div>
             <button type="submit">Sign-In</button>{" "}
