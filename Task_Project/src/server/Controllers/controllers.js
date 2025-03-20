@@ -79,23 +79,35 @@ export const deleteProject = async (req, res) => {
 };
 
 export const addUser = async (req, res) => {
-  console.log("received data:", req.body);
   const { name, last_name, username, date_of_birth, email, password } =
     req.body;
+
+  const capitalize = (str) => {
+    return str
+      .trim()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
+
+  const nameToUpperCase = capitalize(name);
+  const LastNameToUpperCase = capitalize(last_name);
+
+  console.log(nameToUpperCase, LastNameToUpperCase);
 
   // Correggi la formattazione della data
   const formatedDate = new Date(date_of_birth);
   if (isNaN(formatedDate.getTime())) {
     return res.status(400).json({ msg: "Invalid date format" });
   }
-
+  console.log("received data:", req.body);
   try {
     const newUser = await prisma.user.create({
       data: {
-        name,
-        last_name,
+        name: nameToUpperCase,
+        last_name: LastNameToUpperCase,
         username,
-        date_of_birth: formatedDate, // Ora è un oggetto Date valido
+        date_of_birth: formatedDate,
         email,
         password,
       },
