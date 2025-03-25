@@ -28,8 +28,6 @@ const prisma = new PrismaClient();
 
 //i use a addproject controller function to add a new projects to my task manager
 export const addProject = async (req, res) => {
-  console.log("received data: ", req.body);
-
   const { title, description, language } = req.body;
 
   try {
@@ -40,7 +38,7 @@ export const addProject = async (req, res) => {
         language,
       },
     });
-    console.log(newProject);
+
     res.status(201).json({ msg: `Project added correctly`, newProject });
   } catch (error) {
     console.error("Error creating project:", error); // Log dettagliato
@@ -60,7 +58,6 @@ export const showProjects = async (req, res) => {
 
 //i use a deleteProject controller function to delete a projects from my projects list
 export const deleteProject = async (req, res) => {
-  console.log("received data: ", req.params.id);
   const projectId = req.params.id;
   try {
     const deletedProject = await prisma.project.delete({
@@ -93,14 +90,12 @@ export const addUser = async (req, res) => {
   const nameToUpperCase = capitalize(name);
   const LastNameToUpperCase = capitalize(last_name);
 
-  console.log(nameToUpperCase, LastNameToUpperCase);
-
   // Correggi la formattazione della data
   const formatedDate = new Date(date_of_birth);
   if (isNaN(formatedDate.getTime())) {
     return res.status(400).json({ msg: "Invalid date format" });
   }
-  console.log("received data:", req.body);
+
   try {
     const newUser = await prisma.user.create({
       data: {
@@ -117,5 +112,24 @@ export const addUser = async (req, res) => {
     res.status(200).json({ msg: "User added correctly", user: newUser });
   } catch (error) {
     res.status(500).json({ msg: error.message });
+  }
+};
+
+export const findUser = async (req, res) => {
+  const { username, email, password } = req.body;
+  try {
+    const userFound = await prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (userFound.username === username && userFound.password === password) {
+      return res.status(201).json({ msg: "user found!", userFound });
+    } else {
+      return res
+        .status(201)
+        .json({ msg: "Wrong credentials, check again and retry" });
+    }
+  } catch (error) {
+    res.status(500).json({ msg: "no user found" });
   }
 };

@@ -2,7 +2,14 @@ import { useState } from "react";
 import "./LoginPage.css";
 
 export function LoginPage() {
+  //we set the state for the user information upon sign in attemp
   const [userInfo, setUserInfo] = useState(null);
+
+  //we set user information upon login attemp
+  const [userLoginInfo, setuserLoginInfo] = useState(null);
+  const [loginStatus, setLoginStatus] = useState(false);
+
+  //we set state of login and sign in for conditional rendering
   const [signIn, setSignIn] = useState(false);
   const [logIn, setLogIn] = useState(true);
 
@@ -17,7 +24,7 @@ export function LoginPage() {
 
     if (name === "email") {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      setEmailCheck(emailCheck.test(value));
+      setEmailCheck(emailPattern.test(value));
     }
 
     //as before i use a check to see is password's value respect the pattern const
@@ -29,7 +36,6 @@ export function LoginPage() {
     }
 
     setUserInfo((eprev) => ({ ...eprev, [name]: value }));
-    console.log(userInfo, emailCheck, passwordCheck);
   };
 
   const addUser = async (e) => {
@@ -47,13 +53,43 @@ export function LoginPage() {
     console.log(userInfo);
 
     try {
-      const response = await fetch("http://localhost:5000/user", {
+      const response = await fetch("http://localhost:5000/user/register", {
         method: "POST",
         body: JSON.stringify(userInfo),
         headers: { "content-type": "application/json" },
       });
       if (!response.ok) {
         console.error("error is occured response:", response.ok);
+        return;
+      }
+      const data = await response.json();
+      if (data) {
+        setuserLoginInfo(null);
+        setLoginStatus(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLoginInfoChange = (e) => {
+    const { name, value } = e.target;
+    setuserLoginInfo((prev) => ({ ...prev, [name]: value }));
+  };
+  console.log(userLoginInfo);
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    console.log("request lounch, body:", JSON.stringify(userLoginInfo));
+
+    try {
+      const response = await fetch(`http://localhost:5000/user/login`, {
+        method: "POST",
+        bpdy: JSON.stringify(userLoginInfo),
+        headers: { "content-type": "application/json" },
+      });
+      if (!response.ok) {
+        console.error("an error is occured", response.ok);
         return;
       }
       const data = await response.json();
@@ -175,7 +211,10 @@ export function LoginPage() {
           </form>
         )}
         {logIn && (
-          <form className={`log-in-form ${logIn ? "" : "hidden"}`}>
+          <form
+            onSubmit={handleLoginSubmit}
+            className={`log-in-form ${logIn ? "" : "hidden"}`}
+          >
             <div className="input-row">
               <label htmlFor="login-name">userName: </label>
               <input
@@ -183,6 +222,7 @@ export function LoginPage() {
                 name="username"
                 id="login-name"
                 placeholder="UserName"
+                onChange={handleLoginInfoChange}
                 required
               />
             </div>
@@ -193,6 +233,7 @@ export function LoginPage() {
                 name="email"
                 id="user-email"
                 placeholder="example@something.com"
+                onChange={handleLoginInfoChange}
                 required
               />
             </div>
@@ -203,8 +244,12 @@ export function LoginPage() {
                 name="password"
                 id="user-password"
                 placeholder="select your password..."
+                onChange={handleLoginInfoChange}
                 required
               />
+            </div>
+            <div className="login-info-check">
+              {loginStatus && <p>Login effettuto correttamente</p>}
             </div>
             <button type="submit">Log In</button>
             <div className="change-log-sign-page">
