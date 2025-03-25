@@ -129,27 +129,31 @@ export function LoginPage() {
                   onChange={handleInfoChange}
                   required
                 />
-                {!emailCheck && <p>must be a valid email</p>}
               </div>
               <div className="input-row">
                 <label htmlFor="user-password">Password:</label>
-                <div className="input-row-check">
-                  <input
-                    type="password"
-                    name="password"
-                    id="user-password"
-                    placeholder="select your password..."
-                    onChange={handleInfoChange}
-                    required
-                  />
 
-                  {!passwordCheck && (
-                    <p>
-                      password must capital and lowercase letters numbers and
-                      symbols{" "}
-                    </p>
-                  )}
-                </div>
+                <input
+                  type="password"
+                  name="password"
+                  id="user-password"
+                  placeholder="select your password..."
+                  onChange={handleInfoChange}
+                  required
+                />
+              </div>
+              <div className="sign-in-check">
+                <ul>
+                  <li>
+                    {!passwordCheck && (
+                      <p>
+                        password must capital and lowercase letters numbers and
+                        symbols.{" "}
+                      </p>
+                    )}
+                  </li>
+                  <li>{!emailCheck && <p>must be a valid email.</p>}</li>
+                </ul>
               </div>
             </div>
             <button type="submit">Sign-In</button>{" "}
