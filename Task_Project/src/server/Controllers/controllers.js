@@ -123,6 +123,8 @@ export const findUser = async (req, res) => {
     });
 
     if (userFound.username === username && userFound.password === password) {
+      console.log(userFound);
+
       return res.status(201).json({ msg: "user found!", userFound });
     } else {
       return res

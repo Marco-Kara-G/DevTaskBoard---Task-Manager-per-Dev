@@ -109,6 +109,13 @@ h2 {
   font-size: small;
 }
 
+.login-info-check {
+  width: 100%;
+  text-align: center;
+  color: #bbbbdd;
+  text-transform: capitalize;
+}
+
 .sign-in-check > ul > li {
   width: 100%;
 }

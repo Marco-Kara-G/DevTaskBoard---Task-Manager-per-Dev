@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import { Navigate, useNavigate } from "react-router";
 import "./LoginPage.css";
 
 export function LoginPage() {
@@ -8,6 +10,8 @@ export function LoginPage() {
   //we set user information upon login attemp
   const [userLoginInfo, setuserLoginInfo] = useState(null);
   const [loginStatus, setLoginStatus] = useState(false);
+  const navToDashboard = useNavigate();
+  const [message, setMessage] = useState(null);
 
   //we set state of login and sign in for conditional rendering
   const [signIn, setSignIn] = useState(false);
@@ -50,7 +54,6 @@ export function LoginPage() {
 
       return;
     }
-    console.log(userInfo);
 
     try {
       const response = await fetch("http://localhost:5000/user/register", {
@@ -60,6 +63,7 @@ export function LoginPage() {
       });
       if (!response.ok) {
         console.error("error is occured response:", response.ok);
+
         return;
       }
       const data = await response.json();
@@ -76,23 +80,23 @@ export function LoginPage() {
     const { name, value } = e.target;
     setuserLoginInfo((prev) => ({ ...prev, [name]: value }));
   };
-  console.log(userLoginInfo);
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    console.log("request lounch, body:", JSON.stringify(userLoginInfo));
 
     try {
       const response = await fetch(`http://localhost:5000/user/login`, {
         method: "POST",
-        bpdy: JSON.stringify(userLoginInfo),
+        body: JSON.stringify(userLoginInfo),
         headers: { "content-type": "application/json" },
       });
-      if (!response.ok) {
+      if (!response.ok || !response) {
         console.error("an error is occured", response.ok);
+        setMessage("attention, wrong credentials");
         return;
       }
       const data = await response.json();
+      navToDashboard("/dashboard");
     } catch (error) {
       console.error(error);
     }
@@ -249,7 +253,8 @@ export function LoginPage() {
               />
             </div>
             <div className="login-info-check">
-              {loginStatus && <p>Login effettuto correttamente</p>}
+              {loginStatus && <p>Login attemp approved</p>}
+              {message && <p>{message}</p>}
             </div>
             <button type="submit">Log In</button>
             <div className="change-log-sign-page">
